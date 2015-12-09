@@ -18,6 +18,7 @@ public class FBConnection {
 	static String accessToken = "";
 
 	public String getFBAuthUrl() {
+		accessToken = "";
 		String fbLoginUrl = "";
 		try {
 			fbLoginUrl = "http://www.facebook.com/dialog/oauth?" + "client_id=" + FBConnection.FB_APP_ID

@@ -22,7 +22,7 @@ public class FBGraph {
 		String graph = null;
 		try {
 
-			String g = "https://graph.facebook.com/me?" + accessToken;
+			String g = "https://graph.facebook.com/me?fields=id,name,email&" + accessToken;
 			URL u = new URL(g);
 			URLConnection c = u.openConnection();
 			BufferedReader in = new BufferedReader(new InputStreamReader(c.getInputStream()));
@@ -45,7 +45,7 @@ public class FBGraph {
 		try {
 			JSONObject json = new JSONObject(fbGraph);
 			fbProfile.put("id", json.getString("id"));
-			// fbProfile.put("first_name", json.getString("first_name"));
+			fbProfile.put("name", json.getString("name"));
 			if (json.has("email"))
 				fbProfile.put("email", json.getString("email"));
 			if (json.has("gender"))

@@ -61,17 +61,20 @@ public class HelloController extends HttpServlet {
 		FBConnection fbConnection = new FBConnection();
 		String accessToken = fbConnection.getAccessToken(code);
 		
+		System.out.println(accessToken);
+		
 		code = null;
 
 		FBGraph fbGraph = new FBGraph(accessToken);
 		String graph = fbGraph.getFBGraph();
 		Map<String, String> fbProfileData = fbGraph.getGraphData(graph);
-
+		
 		ModelAndView modelandview = new ModelAndView("UserHome");
-		//modelandview.addAllObjects(fbProfileData);
-		modelandview.addObject("fbname",fbProfileData.get("id"));
+		modelandview.addObject("fbname",fbProfileData.get("name"));
+		modelandview.addObject("email",fbProfileData.get("email"));
+		modelandview.addObject("id",fbProfileData.get("id"));
 		return modelandview;
-
+		
 	}
 
 
