@@ -1,5 +1,6 @@
-package com.myproject.testyourself.dao;
+package com.myproject.testyourself.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -7,17 +8,27 @@ import javax.persistence.Id;
 public class User_Details {
 
 	@Id
-	private float user_id;
-
+	@Column
+	private long user_id;
+	@Column
 	private String name;
-
+	@Column
 	private String email;
+	
+	public User_Details() {}
 
-	public float getUser_id() {
+	public User_Details(long user_id, String name, String email) {
+		super();
+		this.user_id = user_id;
+		this.name = name;
+		this.email = email;
+	}
+
+	public long getUser_id() {
 		return user_id;
 	}
 
-	public void setUser_id(float user_id) {
+	public void setUser_id(long user_id) {
 		this.user_id = user_id;
 	}
 

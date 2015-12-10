@@ -12,6 +12,9 @@
 	rel="stylesheet">
 <link href="../css/sidebar.css" rel="stylesheet">
 <link href="../css/sidebar-light.css" rel="stylesheet">
+<link href="../css/Page-Content.css" rel="stylesheet">
+<link href='https://fonts.googleapis.com/css?family=Oswald:700'
+	rel='stylesheet' type='text/css'>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
@@ -63,28 +66,45 @@
 	%>
 
 	<nav class="navbar navbar-default navbar-fixed-top">
-		<div class="container">
-			<div class="navbar-header">
-				<a href="/TESTYourself/user/<%=request.getAttribute("id")%>"
+		<div class="container-fluid"
+			style="margin-left: 30px; margin-right: 40px">
+			<ul class="nav navbar-nav">
+				<li class="active" style="margin-top: 2px"><button
+						class="navbar-toggle collapse in" data-toggle="collapse"
+						id="menu-toggle-2">
+						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button></li>
+			</ul>
+			<div class="navbar-header fixed-brand">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" id="menu-toggle">
+					<span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
+				</button>
+				<a class="navbar-brand"
+					href="/TESTYourself/user/<%=request.getAttribute("id")%>"
 					class="navbar-brand">TEST Youself</a>
 			</div>
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
 
-			<div class="collapse navbar-collapse" id="mainNavBar">
 
 				<ul class="nav navbar-nav navbar-right">
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown"> <%=request.getAttribute("fbname")%>&nbsp;&nbsp;&nbsp;&nbsp;<img
+					<li><a href="#">Tour</a></li>
+					<li><a href="#">Support</a></li>
+					<li class="dropdown active"><a href="#"
+						class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+							<%=request.getAttribute("fbname")%>&nbsp;&nbsp;&nbsp;&nbsp;<img
 							class="img-circle"
 							src="https://graph.facebook.com/<%=request.getAttribute("id")%>/picture?height=24&width=24"
 							alt="Facebook Profile Pic" align="middle"> <span
-							class="caret"></span></a>
+							class="caret"></span>
+					</a>
 						<ul class="dropdown-menu">
 							<li><a href="#">My Profile</a></li>
 							<li><a href="#">Settings</a></li>
 							<li><a onClick="FB.logout()" href="/TESTYourself/welcome">Logout</a></li>
 						</ul></li>
-					<li><a href="#" id="menu-toggle"><i
-							class="fa fa-align-justify"></i></a></li>
 				</ul>
 			</div>
 		</div>
@@ -94,23 +114,26 @@
 
 		<!-- Sidebar -->
 		<div id="sidebar-wrapper">
-			<ul class="sidebar-nav">
-				<li><button class="btn btn-success btn-block btn-lg">Create
-						New Exam</button></li>
-				<li><a href="#"><i class="fa fa-dashboard fa-lg"></i>&nbsp;&nbsp;&nbsp;
-						Dashboard</a></li>
-				<li><a href="#"><i class="fa fa-pencil-square-o fa-lg"></i>&nbsp;&nbsp;&nbsp;
-						My Exams</a></li>
-				<li><a href="#"><i class="fa fa-file fa-lg"></i>&nbsp;&nbsp;&nbsp;
-						My Results</a></li>
-				<li><a href="#"><i class="fa fa-desktop fa-lg"></i>&nbsp;&nbsp;&nbsp;
-						Exam Monitoring<sup><font color="red"> Live!</font></sup></a></li>
-				<li><a href="#"><i class="fa fa-envelope fa-lg"></i>&nbsp;&nbsp;&nbsp;
-						Messages</a></li>
-				<li><a href="#"><i class="fa fa-bar-chart fa-lg"></i>&nbsp;&nbsp;&nbsp;
-						Charts</a></li>
-				<li><a onClick="FB.logout()" href="/TESTYourself/welcome"><i
-						class="fa fa-sign-out fa-lg"></i>&nbsp;&nbsp;&nbsp; Logout</a></li>
+			<ul class="sidebar-nav nav-pills nav-stacked" id="menu">
+				<li class="active"><a href="#"><span
+						class="fa-stack fa-lg pull-left"><i
+							class="fa fa-dashboard fa-stck-1x" style="margin-top: 10px"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dashboard</a></li>
+				<li><a href="#"><span class="fa-stack fa-lg pull-left"><i
+							class="fa fa-pencil-square-o fa-stck-1x" style="margin-top: 10px"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;My
+						Exams</a></li>
+				<li><a href="#"><span class="fa-stack fa-lg pull-left"><i
+							class="fa fa-file fa-stck-1x" style="margin-top: 10px"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;My
+						Results</a></li>
+				<li><a href="#"><span class="fa-stack fa-lg pull-left"><i
+							class="fa fa-desktop fa-stck-1x" style="margin-top: 10px"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exam
+						Monitoring<sup><font color="red"> Live!</font></sup></a></li>
+				<li><a href="#"><span class="fa-stack fa-lg pull-left"><i
+							class="fa fa-envelope fa-stck-1x" style="margin-top: 10px"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Messages</a></li>
+				<li><a href="#"><span class="fa-stack fa-lg pull-left"><i
+							class="fa fa-bar-chart fa-stck-1x" style="margin-top: 10px"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Charts</a></li>
+				<li><a onClick="FB.logout()" href="/TESTYourself/welcome"><span
+						class="fa-stack fa-lg pull-left"><i
+							class="fa fa-power-off fa-stck-1x" style="margin-top: 10px"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logout</a></li>
 			</ul>
 		</div>
 
@@ -119,7 +142,18 @@
 		<div id="page-content-wrapper">
 			<div class="container-fluid">
 
-				<div class="col-md-8"></div>
+				<div class="col-md-8">
+					<div class="content">
+						<img class="img-thumbnail"
+							src="https://graph.facebook.com/<%=request.getAttribute("id")%>/picture?height=100&width=100"
+							alt="Facebook Profile Pic">
+						<h2
+							style="font-family: 'Oswald', sans-serif; color: #2C3E50; opacity: 0.9"><%=request.getAttribute("fbname")%></h2>
+						<h4 style="font-family: 'Oswald', sans-serif; color: #868686">
+							<i class="fa fa-envelope"></i>&nbsp;
+							<%=request.getAttribute("email")%></h4>
+					</div>
+				</div>
 				<div class="col-md-4">
 					<aside class="sidebar-light">
 
@@ -171,7 +205,32 @@
 	<script>
 		$("#menu-toggle").click(function(e) {
 			e.preventDefault();
-			$("#wrapper").toggleClass("menuDisplayed");
+			$("#wrapper").toggleClass("toggled");
+		});
+		$("#menu-toggle-2").click(function(e) {
+			e.preventDefault();
+			$("#wrapper").toggleClass("toggled-2");
+			$('#menu ul').hide();
+		});
+
+		function initMenu() {
+			$('#menu ul').hide();
+			$('#menu ul').children('.current').parent().show();
+			//$('#menu ul:first').show();
+			$('#menu li a').click(function() {
+				var checkElement = $(this).next();
+				if ((checkElement.is('ul')) && (checkElement.is(':visible'))) {
+					return false;
+				}
+				if ((checkElement.is('ul')) && (!checkElement.is(':visible'))) {
+					$('#menu ul:visible').slideUp('normal');
+					checkElement.slideDown('normal');
+					return false;
+				}
+			});
+		}
+		$(document).ready(function() {
+			initMenu();
 		});
 	</script>
 </body>

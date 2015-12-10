@@ -1,0 +1,13 @@
+.content {
+    width: 400px;
+    border-style: double;
+    border-color: #2C3E50;
+    opacity: 0.9;
+    padding: 10px;
+    overflow: hidden;
+}
+
+.content img {
+    margin-right: 20px;
+    float: left;
+}
