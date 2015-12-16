@@ -101,7 +101,7 @@
 							class="caret"></span>
 					</a>
 						<ul class="dropdown-menu">
-							<li><a href="#">My Profile</a></li>
+							<li><a href="#" id="myProfile">My Profile</a></li>
 							<li><a href="#">Settings</a></li>
 							<li><a onClick="FB.logout()" href="/TESTYourself/welcome">Logout</a></li>
 						</ul></li>
@@ -142,7 +142,8 @@
 		<div id="page-content-wrapper">
 			<div class="container-fluid">
 
-				<div class="col-md-8">
+				<div class="col-md-8" id="mainContent">
+
 					<div class="content">
 						<img class="img-thumbnail"
 							src="https://graph.facebook.com/<%=request.getAttribute("id")%>/picture?height=100&width=100"
@@ -153,6 +154,7 @@
 							<i class="fa fa-envelope"></i>&nbsp;
 							<%=request.getAttribute("email")%></h4>
 					</div>
+
 				</div>
 				<div class="col-md-4">
 					<aside class="sidebar-light">
@@ -231,6 +233,12 @@
 		}
 		$(document).ready(function() {
 			initMenu();
+		});
+		$(document).ready(function() {
+			$("#myProfile").click(function(e) {
+				e.preventDefault();
+				$("#mainContent").load("UserProfile.jsp #content");
+			});
 		});
 	</script>
 </body>

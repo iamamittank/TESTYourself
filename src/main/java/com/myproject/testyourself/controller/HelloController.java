@@ -7,6 +7,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,6 +52,9 @@ public class HelloController extends HttpServlet {
 			FBGraph fbGraph = new FBGraph(accessToken);
 			String graph = fbGraph.getFBGraph();
 			Map<String, String> fbProfileData = fbGraph.getGraphData(graph);
+			
+			HttpSession session = req.getSession();
+			session.setAttribute("email", fbProfileData.get("email"));
 
 			resp.sendRedirect("/TESTYourself/user/" + fbProfileData.get("id"));
 		}
