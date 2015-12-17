@@ -1,12 +1,12 @@
 /* Giving the page a width */
 
-body { 
-    padding-top: 50px; 
+body {
+	padding-top: 50px;
 }
 
 section {
 	max-width: 960px;
-	padding:0 20px;
+	padding: 0 20px;
 	margin: 0 auto;
 	overflow: hidden;
 	box-sizing: border-box;
@@ -31,15 +31,19 @@ section {
 .sidebar-light .company-info {
 	background-color: #F1F4F6;
 	margin-bottom: 30px;
-	padding: 35px 0;
+	padding: 0px 0;
 }
 
 .sidebar-light .company-info h3 {
-	color:  #4E5255;
-	font-size: 18px;
+	background-color: #2C3E50;
+	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+	padding: 20px 30px;
+	text-align: left;
+	color: #ffffff;
+	font-size: 16px;
 	font-weight: bold;
-	margin: 0 0 25px;
-	padding: 0 40px;
+	margin: 0;
+	opacity: 0.9;
 }
 
 .sidebar-light .company-info p {
@@ -47,14 +51,14 @@ section {
 	font-size: 13px;
 	line-height: 19px;
 	margin: 0 0 30px;
-	padding: 0 40px;
+	padding: 40px;
 }
 
 .sidebar-light .company-info .social-buttons {
 	padding: 0 40px;
 }
 
-.sidebar-light .company-info .social-buttons .fa {
+.sidebar-light .latest-blog-posts .social-buttons .fa {
 	border-radius: 2px;
 	font-size: 20px;
 	color: #ffffff;
@@ -75,7 +79,7 @@ section {
 	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
 	padding: 20px 30px;
 	text-align: left;
-	color:  #ffffff;
+	color: #ffffff;
 	font-size: 16px;
 	font-weight: bold;
 	margin: 0;
@@ -109,7 +113,7 @@ section {
 	color: #92999F;
 	font-size: 11px;
 	display: block;
-	margin-top:4px;
+	margin-top: 4px;
 }
 
 /* Making the sidebar responsive */
@@ -117,7 +121,7 @@ section {
 @media (max-width: 900px) {
 
 	.main-content {
-		float:none;
+		float: none;
 		width: auto;
 		margin-bottom: 40px;
 	}

@@ -4,7 +4,7 @@
 
 <html lang="en">
 <head>
-<title>Test Youself</title>
+<title>Test Youself | Dashboard</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link
@@ -101,7 +101,9 @@
 							class="caret"></span>
 					</a>
 						<ul class="dropdown-menu">
-							<li><a href="#" id="myProfile">My Profile</a></li>
+							<li><a
+								href="/TESTYourself/user=<%=request.getAttribute("id")%>/profile"
+								id="myProfile">My Profile</a></li>
 							<li><a href="#">Settings</a></li>
 							<li><a onClick="FB.logout()" href="/TESTYourself/welcome">Logout</a></li>
 						</ul></li>
@@ -115,7 +117,8 @@
 		<!-- Sidebar -->
 		<div id="sidebar-wrapper">
 			<ul class="sidebar-nav nav-pills nav-stacked" id="menu">
-				<li class="active"><a href="#"><span
+				<li class="active"><a
+					href="/TESTYourself/user=<%=request.getAttribute("id")%>/profile"><span
 						class="fa-stack fa-lg pull-left"><i
 							class="fa fa-dashboard fa-stck-1x" style="margin-top: 10px"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dashboard</a></li>
 				<li><a href="#"><span class="fa-stack fa-lg pull-left"><i
@@ -142,57 +145,38 @@
 		<div id="page-content-wrapper">
 			<div class="container-fluid">
 
-				<div class="col-md-8" id="mainContent">
-
-					<div class="content">
-						<img class="img-thumbnail"
-							src="https://graph.facebook.com/<%=request.getAttribute("id")%>/picture?height=100&width=100"
-							alt="Facebook Profile Pic">
-						<h2
-							style="font-family: 'Oswald', sans-serif; color: #2C3E50; opacity: 0.9"><%=request.getAttribute("fbname")%></h2>
-						<h4 style="font-family: 'Oswald', sans-serif; color: #868686">
-							<i class="fa fa-envelope"></i>&nbsp;
-							<%=request.getAttribute("email")%></h4>
-					</div>
-
-				</div>
+				<div class="col-md-8"></div>
 				<div class="col-md-4">
 					<aside class="sidebar-light">
 
 						<div class="company-info">
 
-							<h3>Company Inc</h3>
+							<h3>Notifications</h3>
 
-							<p>We are the best company. Our high spirit and good work
-								have won us numerous awards. Follow us to stay in touch!</p>
+							<p>No new notification!</p>
 
-							<div class="social-buttons">
-
-								<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
-									class="fa fa-twitter"></i></a> <a href="#"><i
-									class="fa fa-linkedin"></i></a> <a href="#"><i
-									class="fa fa-github"></i></a>
-
-							</div>
 
 						</div>
 
 						<div class="latest-blog-posts">
 
 							<h3>
-								<i class="fa fa-rss"></i> Latest blog posts
+								<i class="fa fa-globe"></i>&nbsp;&nbsp;&nbsp;&nbsp; Connect with
+								us!
 							</h3>
+							<br />
 
-							<ul>
-								<li><a href="#">Lorem ipsum dolor sit amet. </a><span>2
-										days ago</span></li>
-								<li><a href="#">Pellentesque quis eros dignis. </a><span>one
-										week ago</span></li>
-								<li><a href="#">Lorem ipsum dolor sit amet. </a><span>2
-										weeks ago</span></li>
-								<li><a href="#">Nam tempus turpis viverra, mattis diam
-										ac, malesuada mi. </a><span>3 weeks ago</span></li>
-							</ul>
+							<center>
+								<div class="social-buttons">
+
+									<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
+										class="fa fa-twitter"></i></a> <a href="#"><i
+										class="fa fa-linkedin"></i></a> <a href="#"><i
+										class="fa fa-github"></i></a>
+
+								</div>
+							</center>
+							<br />
 
 						</div>
 
@@ -234,12 +218,8 @@
 		$(document).ready(function() {
 			initMenu();
 		});
-		$(document).ready(function() {
-			$("#myProfile").click(function(e) {
-				e.preventDefault();
-				$("#mainContent").load("UserProfile.jsp #content");
-			});
-		});
 	</script>
+	<script src="http://code.jquery.com/jquery-2.1.4.js"></script>
+	<script src="../js/general.js"></script>
 </body>
 </html>
