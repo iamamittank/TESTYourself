@@ -3,17 +3,17 @@ package com.myproject.testyourself.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-public class user_details {
+@Table(name = "user_details")
+public class UserDetails {
 
 	@Id
 	@Column
 	private long userId;
 	@Column
-	private String userFName;
-	@Column
-	private String userLName;
+	private String userName;
 	@Column
 	private String userEmail;
 	@Column
@@ -27,20 +27,12 @@ public class user_details {
 		this.userId = userId;
 	}
 
-	public String getUserFName() {
-		return userFName;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setUserFName(String userFName) {
-		this.userFName = userFName;
-	}
-
-	public String getUserLName() {
-		return userLName;
-	}
-
-	public void setUserLName(String userLName) {
-		this.userLName = userLName;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public String getUserEmail() {

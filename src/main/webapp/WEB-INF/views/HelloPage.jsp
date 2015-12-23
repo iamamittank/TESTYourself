@@ -193,13 +193,13 @@
 					<h3 class="modal-title">Sign in</h3>
 				</div>
 				<div class="modal-body">
-					<a href="<%=fbConnection.getFBAuthUrl()%>"> <img
-						style="margin-top: 138px;"
-						src="<c:url value='/images/facebookloginbutton.png' />" />
-					</a>
-
+				<p><center> You don't need to remember another pair of username and password.</center> </p>
+				<p><center> You can simply signin with world's most popular social networking website.</center></p>
+					
 				</div>
-				<div class="modal-footer"></div>
+				<div class="modal-footer"><a href="<%=fbConnection.getFBAuthUrl()%>"> <img
+						src="<c:url value='/images/facebookloginbutton.png' />" style="mar" />
+					</a></div>
 			</div>
 		</div>
 	</div>

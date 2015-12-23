@@ -22,7 +22,7 @@ public class FBGraph {
 		String graph = null;
 		try {
 
-			String g = "https://graph.facebook.com/me?fields=id,name,email&" + accessToken;
+			String g = "https://graph.facebook.com/me?fields=id,name,email,age_range,gender&" + accessToken;
 			URL u = new URL(g);
 			URLConnection c = u.openConnection();
 			BufferedReader in = new BufferedReader(new InputStreamReader(c.getInputStream()));
@@ -50,6 +50,8 @@ public class FBGraph {
 				fbProfile.put("email", json.getString("email"));
 			if (json.has("gender"))
 				fbProfile.put("gender", json.getString("gender"));
+			if (json.has("age_range"))
+				fbProfile.put("age_range", json.get("age_range").toString());
 		} catch (JSONException e) {
 			e.printStackTrace();
 			throw new RuntimeException("ERROR in parsing FB graph data. " + e);

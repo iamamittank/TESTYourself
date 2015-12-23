@@ -103,7 +103,7 @@
 						<ul class="dropdown-menu">
 							<li><a
 								href="/TESTYourself/user=<%=request.getAttribute("id")%>/profile"
-								id="myProfile">My Profile</a></li>
+								onClick="changeContent();" id="myProfile">My Profile</a></li>
 							<li><a href="#">Settings</a></li>
 							<li><a onClick="FB.logout()" href="/TESTYourself/welcome">Logout</a></li>
 						</ul></li>
@@ -117,8 +117,11 @@
 		<!-- Sidebar -->
 		<div id="sidebar-wrapper">
 			<ul class="sidebar-nav nav-pills nav-stacked" id="menu">
+				<li><a href="#" style="background-color: #3ADF00; color: #2C3E50;"><span class="fa-stack fa-lg pull-left"><i
+							class="fa fa-pencil fa-stck-1x" style="margin-top: 10px"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Create
+						New Exam</b></a></li>
 				<li class="active"><a
-					href="/TESTYourself/user=<%=request.getAttribute("id")%>/profile"><span
+					href="/TESTYourself/user=<%=request.getAttribute("id")%>/dashboard"><span
 						class="fa-stack fa-lg pull-left"><i
 							class="fa fa-dashboard fa-stck-1x" style="margin-top: 10px"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dashboard</a></li>
 				<li><a href="#"><span class="fa-stack fa-lg pull-left"><i
@@ -134,9 +137,6 @@
 							class="fa fa-envelope fa-stck-1x" style="margin-top: 10px"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Messages</a></li>
 				<li><a href="#"><span class="fa-stack fa-lg pull-left"><i
 							class="fa fa-bar-chart fa-stck-1x" style="margin-top: 10px"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Charts</a></li>
-				<li><a onClick="FB.logout()" href="/TESTYourself/welcome"><span
-						class="fa-stack fa-lg pull-left"><i
-							class="fa fa-power-off fa-stck-1x" style="margin-top: 10px"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logout</a></li>
 			</ul>
 		</div>
 
@@ -145,7 +145,7 @@
 		<div id="page-content-wrapper">
 			<div class="container-fluid">
 
-				<div class="col-md-8"></div>
+				<div class="col-md-8" id="mainContent"></div>
 				<div class="col-md-4">
 					<aside class="sidebar-light">
 
@@ -198,6 +198,9 @@
 			$("#wrapper").toggleClass("toggled-2");
 			$('#menu ul').hide();
 		});
+		function changeContent() {
+			$('#mainContent').load('UserProfile.jsp');
+		}
 
 		function initMenu() {
 			$('#menu ul').hide();
