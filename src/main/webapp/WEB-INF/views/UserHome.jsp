@@ -117,14 +117,14 @@
 		<!-- Sidebar -->
 		<div id="sidebar-wrapper">
 			<ul class="sidebar-nav nav-pills nav-stacked" id="menu">
-				<li><a href="#" style="background-color: #3ADF00; color: #2C3E50;"><span class="fa-stack fa-lg pull-left"><i
+				<li><a href="/TESTYourself/user=<%=request.getAttribute("id")%>/create" style="background-color: #3ADF00; color: #2C3E50;"><span class="fa-stack fa-lg pull-left"><i
 							class="fa fa-pencil fa-stck-1x" style="margin-top: 10px"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Create
 						New Exam</b></a></li>
 				<li class="active"><a
 					href="/TESTYourself/user=<%=request.getAttribute("id")%>/dashboard"><span
 						class="fa-stack fa-lg pull-left"><i
 							class="fa fa-dashboard fa-stck-1x" style="margin-top: 10px"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dashboard</a></li>
-				<li><a href="#"><span class="fa-stack fa-lg pull-left"><i
+				<li><a href="/TESTYourself/user=<%=request.getAttribute("id")%>/exams"><span class="fa-stack fa-lg pull-left"><i
 							class="fa fa-pencil-square-o fa-stck-1x" style="margin-top: 10px"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;My
 						Exams</a></li>
 				<li><a href="#"><span class="fa-stack fa-lg pull-left"><i
@@ -145,7 +145,13 @@
 		<div id="page-content-wrapper">
 			<div class="container-fluid">
 
-				<div class="col-md-8" id="mainContent"></div>
+				<div class="col-md-8" id="mainContent">
+				<% if(request.getAttribute("status") == "ExamCreated") { %>
+					<div class="alert alert-success">
+						<strong>Success!</strong> Exam is successfully created.
+					</div>
+				<% } %>
+				</div>
 				<div class="col-md-4">
 					<aside class="sidebar-light">
 

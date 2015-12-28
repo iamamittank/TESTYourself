@@ -57,6 +57,7 @@
 		<property name="annotatedClasses">
 			<list>
 				<value>com.myproject.testyourself.model.UserDetails</value>
+				<value>com.myproject.testyourself.model.ExamDetails</value>
 			</list>
 		</property>
 		
