@@ -38,29 +38,9 @@
 	crossorigin="anonymous">
 	
 </script>
-<script>
-	$(document).ready(function() {
-		$.ajaxSetup({
-			cache : true
-		});
-		$.getScript('//connect.facebook.net/en_US/sdk.js', function() {
-			FB.init({
-				appId : '472869032891039',
-				version : 'v2.4' // or v2.0, v2.1, v2.2, v2.3
-			});
-			$('#loginbutton,#feedbutton').removeAttr('disabled');
-			FB.getLoginStatus(updateStatusCallback);
-		});
-	});
-</script>
 </head>
 <body>
-	<script>
-		FB.logout(function(response) {
-			// Person is now logged out
-			window.location.replace("/TESTYourself/welcome");
-		});
-	</script>
+
 	<%
 		Object fbData = pageContext.findAttribute("fbdata");
 	%>
@@ -117,14 +97,19 @@
 		<!-- Sidebar -->
 		<div id="sidebar-wrapper">
 			<ul class="sidebar-nav nav-pills nav-stacked" id="menu">
-				<li><a href="/TESTYourself/user=<%=request.getAttribute("id")%>/create" style="background-color: #3ADF00; color: #2C3E50;"><span class="fa-stack fa-lg pull-left"><i
+				<li><a
+					href="/TESTYourself/user=<%=request.getAttribute("id")%>/create"
+					style="background-color: #3ADF00; color: #2C3E50;"><span
+						class="fa-stack fa-lg pull-left"><i
 							class="fa fa-pencil fa-stck-1x" style="margin-top: 10px"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Create
-						New Exam</b></a></li>
+							New Exam</b></a></li>
 				<li class="active"><a
 					href="/TESTYourself/user=<%=request.getAttribute("id")%>/dashboard"><span
 						class="fa-stack fa-lg pull-left"><i
 							class="fa fa-dashboard fa-stck-1x" style="margin-top: 10px"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dashboard</a></li>
-				<li><a href="/TESTYourself/user=<%=request.getAttribute("id")%>/exams"><span class="fa-stack fa-lg pull-left"><i
+				<li><a
+					href="/TESTYourself/user=<%=request.getAttribute("id")%>/exams"><span
+						class="fa-stack fa-lg pull-left"><i
 							class="fa fa-pencil-square-o fa-stck-1x" style="margin-top: 10px"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;My
 						Exams</a></li>
 				<li><a href="#"><span class="fa-stack fa-lg pull-left"><i
@@ -146,12 +131,33 @@
 			<div class="container-fluid">
 
 				<div class="col-md-8" id="mainContent">
-				<% if(request.getAttribute("status") == "ExamCreated") { %>
+					<%
+						if (request.getAttribute("status") == "ExamCreated") {
+					%>
 					<div class="alert alert-success">
+						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 						<strong>Success!</strong> Exam is successfully created.
 					</div>
-				<% } %>
+					<%
+						request.setAttribute("status", null);
+						}
+					%>
+					<h2
+						style="font-family: 'Oswald', sans-serif; color: #2C3E50; opacity: 0.9">
+						<i class="fa fa-tachometer fa-lg"></i> &nbsp;&nbsp;&nbsp;Dashboard
+					</h2>
+					<hr class="divider" />
+					<div class="content">
+						<h4 style="font-family: 'Oswald', sans-serif; color: #868686">
+							My Exams</h4>
+						<div class="list-group">
+							<a href="#" class="list-group-item active">First item</a> <a
+								href="#" class="list-group-item">Second item</a> <a href="#"
+								class="list-group-item">Third item</a>
+						</div>
+					</div>
 				</div>
+
 				<div class="col-md-4">
 					<aside class="sidebar-light">
 
@@ -229,6 +235,5 @@
 		});
 	</script>
 	<script src="http://code.jquery.com/jquery-2.1.4.js"></script>
-	<script src="../js/general.js"></script>
 </body>
 </html>

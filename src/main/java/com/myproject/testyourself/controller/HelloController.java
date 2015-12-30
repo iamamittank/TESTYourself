@@ -5,7 +5,9 @@ import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -19,10 +21,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.myproject.testyourself.dao.ExamDetailsDao;
 import com.myproject.testyourself.model.ExamDetails;
 import com.myproject.testyourself.model.UserDetails;
 import com.myproject.testyourself.services.ExamDetailsService;
@@ -82,6 +81,10 @@ public class HelloController extends HttpServlet {
 				user.setUserEmail(fbProfileData.get("email"));
 				user.setUserSource("Facebook");
 
+				System.out.println(fbProfileData.get("name"));
+				System.out.println(fbProfileData.get("email"));
+				System.out.println(fbProfileData.get("id"));
+
 				userService.addUser(user);
 			} catch (DataIntegrityViolationException e) {
 				System.out.println("User Existed");
@@ -111,12 +114,12 @@ public class HelloController extends HttpServlet {
 
 	}
 
-	@SuppressWarnings("deprecation")
-	@RequestMapping(value = "/user={userId}/create/submit", method = RequestMethod.POST)
-	public ModelAndView submitExam(@PathVariable("userId") String Id, HttpServletRequest req, HttpServletResponse resp)
+	@RequestMapping(value = "/user={userId}/create/submit")
+	public void submitExam(@PathVariable("userId") String Id, HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
 		try {
+
 			String startDate = req.getParameter("startDate");
 			DateFormat df = new SimpleDateFormat("dd-mm-yyyy");
 			Date s_date = null;
@@ -125,7 +128,7 @@ public class HelloController extends HttpServlet {
 			} catch (ParseException e) {
 				System.out.println(e);
 			}
-			
+
 			String endDate = req.getParameter("endDate");
 			DateFormat df1 = new SimpleDateFormat("dd-mm-yyyy");
 			Date e_date = null;
@@ -134,66 +137,72 @@ public class HelloController extends HttpServlet {
 			} catch (ParseException e) {
 				System.out.println(e);
 			}
-			
-			String duration = req.getAttribute("Hour") + "-" + req.getAttribute("Minute");
-			
+
+			String duration = req.getParameter("Hour") + "-" + req.getParameter("Minute");
+
+			System.out.println(req.getParameter("examName"));
+			System.out.println(duration);
+			System.out.println(req.getParameter("startDate"));
+			System.out.println(req.getParameter("endDate"));
+
 			ExamDetails exam = new ExamDetails();
 			exam.setExamName(req.getParameter("examName"));
 			exam.setExamDuration(duration);
 			exam.setExamStart(s_date);
 			exam.setExamEnd(e_date);
-			exam.setUserId(Long.parseLong(Id));
-			
+			UserDetails user = userService.getUserById(Long.parseLong(Id));
+			exam.setUser(user);
+
 			examService.addExam(exam);
-			
+			userService.updateUser(user);
+
+			HttpSession session = req.getSession();
+			session.setAttribute("status", "Exam created");
+
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		
-		FBGraph fbGraph = new FBGraph(accessToken);
-		String graph = fbGraph.getFBGraph();
-		Map<String, String> fbProfileData = fbGraph.getGraphData(graph);
 
-		ModelAndView modelandview = new ModelAndView("UserHome");
-		modelandview.addObject("status", "ExamCreated");
-		modelandview.addObject("fbname", fbProfileData.get("name"));
-		modelandview.addObject("email", fbProfileData.get("email"));
-		modelandview.addObject("id", fbProfileData.get("id"));
-
-		return modelandview;
+		resp.sendRedirect("/TESTYourself/user=" + Id + "/dashboard");
 
 	}
 
 	@RequestMapping("/user={userId}/dashboard")
 	public ModelAndView login(@PathVariable("userId") String Id, HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		if (code == null || code.equals("")) {
-			resp.sendRedirect("/TESTYourself/welcome");
+		ModelAndView modelandview = new ModelAndView();
+
+		try {
+			FBGraph fbGraph = new FBGraph(accessToken);
+			String graph = fbGraph.getFBGraph();
+			Map<String, String> fbProfileData = fbGraph.getGraphData(graph);
+			modelandview.setViewName("UserHome");
+			modelandview.addObject("fbname", fbProfileData.get("name"));
+			modelandview.addObject("email", fbProfileData.get("email"));
+			modelandview.addObject("id", fbProfileData.get("id"));
+
+			String status = req.getSession().getAttribute("status").toString();
+			if (status.equalsIgnoreCase("Exam created")) {
+				modelandview.addObject("status", "ExamCreated");
+			}
+		} catch (Exception e) {
+			System.out.println(e);
 		}
 
-		code = null;
-
-		FBGraph fbGraph = new FBGraph(accessToken);
-		String graph = fbGraph.getFBGraph();
-		Map<String, String> fbProfileData = fbGraph.getGraphData(graph);
-
-		ModelAndView modelandview = new ModelAndView("UserHome");
-		modelandview.addObject("fbname", fbProfileData.get("name"));
-		modelandview.addObject("email", fbProfileData.get("email"));
-		modelandview.addObject("id", fbProfileData.get("id"));
-
 		return modelandview;
-
 	}
 
 	@RequestMapping("/user={userId}/exams")
 	public ModelAndView exams(@PathVariable("userId") String Id, HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		if (code == null || code.equals("")) {
-			resp.sendRedirect("/TESTYourself/welcome");
-		}
 
-		code = null;
+		List<ExamDetails> exams = examService.getAllExams();
+		List<ExamDetails> temp = new ArrayList<ExamDetails>();
+		for (int i = 0; i < exams.size(); i++) {
+			if (exams.get(i).getUser().getUserId() == Long.parseLong(Id)) {
+				temp.add(exams.get(i));
+			}
+		}
 
 		FBGraph fbGraph = new FBGraph(accessToken);
 		String graph = fbGraph.getFBGraph();
@@ -203,6 +212,7 @@ public class HelloController extends HttpServlet {
 		modelandview.addObject("fbname", fbProfileData.get("name"));
 		modelandview.addObject("email", fbProfileData.get("email"));
 		modelandview.addObject("id", fbProfileData.get("id"));
+		modelandview.addObject("exams", temp);
 
 		return modelandview;
 
@@ -212,10 +222,6 @@ public class HelloController extends HttpServlet {
 	public ModelAndView profile(@PathVariable("userId") String Id, HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
-		if (code == null || code.equals("")) {
-			resp.sendRedirect("/TESTYourself/welcome");
-		}
-		
 		ModelAndView modelandview = new ModelAndView("UserProfile");
 
 		FBGraph fbGraph = new FBGraph(accessToken);

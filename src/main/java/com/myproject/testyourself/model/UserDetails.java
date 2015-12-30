@@ -1,7 +1,11 @@
 package com.myproject.testyourself.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -19,7 +23,7 @@ public class UserDetails {
 	private String userEmail;
 	@Column
 	private String userSource;
-
+	
 	public long getUserId() {
 		return userId;
 	}
@@ -52,4 +56,5 @@ public class UserDetails {
 		this.userSource = userSource;
 	}
 
+	
 }

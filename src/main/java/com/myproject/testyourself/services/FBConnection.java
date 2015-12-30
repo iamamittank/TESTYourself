@@ -27,6 +27,7 @@ public class FBConnection {
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
+		System.out.println(fbLoginUrl);
 		return fbLoginUrl;
 	}
 
@@ -72,6 +73,7 @@ public class FBConnection {
 				throw new RuntimeException("ERROR: Access Token Invalid: " + accessToken);
 			}
 		}
+		System.out.println(accessToken);
 		return accessToken;
 	}
 }
